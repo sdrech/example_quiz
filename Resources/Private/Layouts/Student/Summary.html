@@ -1,0 +1,16 @@
+{namespace _OurBrand_\Quiz\ViewHelpers}
+<f:render partial="Student/Review/Top" arguments="{UIPath: UIPath, quiz: quiz, studentQuizSession: studentQuizSession}"/>
+<f:render partial="Student/Review/SummaryHeader" arguments="{UIPath: UIPath, quiz: quiz, studentQuizSession: studentQuizSession, quizGrades: quizGrades, roundedPercentageScore: roundedPercentageScore}"/>
+
+
+<f:render section="Content" />
+
+
+<f:render partial="Student/Review/SummaryBottom" arguments="{UIPath: UIPath, quiz: quiz}"/>
+<f:render partial="Student/Review/Bottom" arguments="{UIPath: UIPath}"/>
+
+<f:render section="HiddenJavascriptHtml" optional="true" />
+<f:render section="Script" optional="true" />
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+{namespace _OurBrand_\Quiz\ViewHelpers}
+<f:render partial="Instructor/Quiz/Top" arguments="{UIPath: UIPath, logintime: logintime}"/>
+<f:render partial="Instructor/Quiz/Header" arguments="{quiz: quiz, duration: duration}"/>
+
+<f:form action="update" object="{currentExercise}" objectName="exercise" method="post" class="ajaxPostNot"
+		name="exercise-form" id="exercise-form" enctype="multipart/form-data"
+		onsubmit="return ExerciseInstructor.saveProgress(true);">
+	<div class="pad-h-s quizmate-instructor-content">
+		<div class="container">
+			<div class="grid">
+				<div class="quizmate-instructor-left">
+					<f:render partial="Instructor/Quiz/Sidebar"
+							  arguments="{quiz: quiz, currentExercise: currentExercise}"/>
+				</div>
+
+				<div class="quizmate-instructor-right">
+					<div class="quizmate-instructor-main">
+						<f:render partial="Instructor/Exercise/EditCommon" arguments="{exercise: currentExercise}"/>
+						<f:flashMessages class="flashmessages"/>
+						<f:render section="Content"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<f:render partial="Instructor/Quiz/Footer" arguments="{
+        isEditor: isEditor,
+        exercise: currentExercise,
+        quiz: quiz,
+
+        editExerciseDurations: editExerciseDurations,
+        editExerciseCategories: editExerciseCategories,
+        editExerciseDifficulties: editExerciseDifficulties
+    }"/>
+</f:form>
+
+
+<div class="hide">
+	<!-- modal view-->
+	<f:render partial="Instructor/Modal/AddExercise.html"
+			  arguments="{parentQuiz: quiz, exerciseCategories: exerciseCategories}"/>
+</div>
+<f:render partial="Instructor/Modal/ExerciseAddText" arguments="{exercise: currentExercise}"/>
+
+<f:render partial="Instructor/Quiz/JavaScript" arguments="{UIPath: UIPath, logintime: logintime}" />
+
+<f:render section="HiddenJavascriptHtml" optional="true"/>
+<f:render section="Script" optional="true"/>
+
+</body>
+</html>

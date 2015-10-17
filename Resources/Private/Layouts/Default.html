@@ -1,0 +1,221 @@
+{namespace _OurBrand_\Quiz\ViewHelpers}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+
+	<title><f:render section="Title" /></title>
+
+	<!--<link href="{f:uri.resource(path: 'css/quiz.css')}" rel="stylesheet" />-->
+	<link href="{UIPath}css/quizmate/quizmate-instructor.min.css" rel="stylesheet" />
+	<link href="{UIPath}plugins/icomoon/style.css" rel="stylesheet" />
+
+	<f:comment>Local jquery source for offline dev.</f:comment>
+
+	<!-- scripts - that has to be in the header, -->
+	<script src="{UIPath}js/vendor/modernizr-2.6.2.min.js"></script>
+	<f:base />
+</head>
+
+<body>
+<div class="quizmate-instructor-name-space name-space">
+	<!--[if lt IE 7]>
+	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+	<![endif]-->
+	<div class="debug-grid"></div>
+	<div class="pad-bottom-xl">
+
+		<header class="bg-primary pad-s clearfix quizmate-instructor-header">
+			<div class="container clearfix">
+
+				<a href="" class="btn btn-primary-light mar-bottom-0"><i class="icon-font-arrow-left"></i> Archive</a>
+
+		<span class="color-primary-lighter mar-left">
+			<i class="icon-font-clock"></i>
+			<i> Duration 64:00 min.</i>
+		</span>
+
+				<div class="text-align-right float-right">
+					<i class="color-primary-lighter mar-right-s italic">Last Saved: 1 min.</i>
+					<a href="" class="btn btn-primary-light mar-bottom-0 mar-right-s js-quiz-save">Save</a>
+					<a href="" class="btn mar-bottom-0 btn-grey js-quiz-complete">Complete quiz <f:if condition="{quiz.readyForCompletion} == 2">*</f:if></a>
+				</div>
+
+
+			</div>
+		</header>
+
+
+		<div class="pad-h-s quizmate-instructor-content">
+			<div class="container">
+				<div class="grid">
+					<div class="col col-4">
+
+						<div class="quizmate-instructor-sidebar">
+							<nav role="navigation">
+								<div class="quizmate-instructor-start-btn">
+                                    <span><i class="icon-font-home font-size-s"></i></span>
+									<f:link.action action="edit" controller="Quiz" arguments="{quiz: quiz}">
+										<f:translate id="quiz.start"/> <f:if condition="{quiz.isDraft}">[<f:translate id="quiz.draft"/>]</f:if>
+									</f:link.action>
+                                    <i class="icon-font-checkmark color-gray"></i>
+								</div>
+								<ul class="unstyled sortable mar-bottom-0">
+									<f:for each="{quiz.exercises}" as="exercise">
+										<li class="<f:if condition="{currentExercise} == {exercise}">active</f:if>" id="exercise_{exercise -> f:format.identifier()}" />">
+										<div class="sortable-handle"></div>
+										<f:link.action action="edit" controller="exercise" arguments="{exercise: exercise}">
+											{exercise.title}
+										</f:link.action>
+										<span href=""><i class="icon-font-close" onclick="$(this).closest('li').find('form')[0].submit();"></i></span>
+										</li>
+									</f:for>
+								</ul>
+								<div class="quizmate-instructor-end-btn">
+									<span><i class="icon-font-flag font-size-s"></i></span>
+									<f:link.action action="finish" controller="Quiz" arguments="{quiz: quiz}" class="js-quiz-finish"><f:translate id="quiz.end"/></f:link.action>
+                                    <i class="icon-font-checkmark color-gray"></i>
+								</div>
+							</nav>
+						</div>
+					</div>
+
+					<div class="col col-16">
+						<div class="mar-v-s mar-left-s" style="">
+							<f:flashMessages class="flashmessages" />
+							<f:render section="Content" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer class="quizmate-instructor-footer clearfix">
+			<div class="container">
+
+				<a href="#modal-exercise-type-picker" class="modal btn btn-tertiary-dark mar-right mar-bottom-0" ><i class="icon-font-plus"></i>
+					<f:translate id="quiz.addExercise"/>
+				</a>
+
+					<a class="btn btn-active mar-bottom-0 float-right" href=""><i class="icon-font-bug"></i> Preview</a>
+
+					<a class="check-btn mar-right-s float-right" href="">
+			<span>
+				<i class="icon-font-pacman"></i>
+			</span>
+            <span>
+				<i class="icon-font-checkmark"></i>
+			</span>
+					</a>
+
+					<a class="check-btn check-btn-success mar-right-s float-right" href="">
+			<span>
+				<i class="icon-font-question"></i>
+			</span>
+			<span>
+				<i class="icon-font-checkmark"></i>
+			</span>
+					</a>
+
+
+				</div>        <i><f:translate id="user.youAre" arguments="{username: user.identifier}"/> - <f:link.action action="logout" controller="authentication"><f:translate id="user.logout"/></f:link.action> &nbsp;<f:link.action action="index" controller="quiz">Front</f:link.action></i>
+
+		</footer>
+
+
+		<div class="hide">
+
+			<!-- modal view-->
+			<f:render partial="Instructor/Modal/AddExercise.html" arguments="{parentQuiz: quiz}" />
+
+		</div>
+
+
+	</div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write("<script src=\"{UIPath}js/vendor/jquery-1.9.1.min.js\"><\/script>")</script>
+<script src="{UIPath}plugins/plugins.js"></script>
+<script src="{UIPath}js/quizmate/quizmate.min.js"></script>
+<script src="{f:uri.resource(path: 'js/plugins/jqueryvalidation/jquery.validate.min.js')}"></script>
+<script src="{f:uri.resource(path: 'js/quizmate_application.js')}"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		// make menu sortable
+		$('.sortable').sortable({
+			handle: ".sortable-handle",
+			stop: function() { Quiz.saveSortorder(); }
+		});
+
+
+		$(".ajaxPost").each(function(){
+			var form = $(this);
+			$(this).submit(function(e){
+				var submitButton = $(this).find("input[type='submit']").attr("disabled", "disabled");
+				e.preventDefault();
+				var url = $(this).attr("action");
+				var params = $(this).serialize();
+				params += "&json=1";
+				$.ajax({
+					type: 'POST',
+					url: url,
+					data: params,
+					dataType: 'json',
+					success: function(data){
+						$(submitButton).removeAttr("disabled");
+						var cb = window[$(form).attr("name")+'PostAjax'];
+						if(typeof cb == 'function'){
+							cb(data);
+						}
+
+					},
+					error: function(){
+						$(submitButton).removeAttr("disabled");
+					}
+				});
+			});
+		});
+
+		$(".inlineEdit").click(function(e){
+			var oldContent = $(this);
+			var val = $(this).text();
+			var font = $(this).css("fontFamily");
+			var fontSize = $(this).css("fontSize");
+			var fontWeight = $(this).css("fontWeight");
+			var margin = $(this).css("margin");
+			var newInput = $("<input>").attr("type", "text").attr("value", val).css({fontFamily:font, fontSize:fontSize, fontWeight:fontWeight, border: "1px solid #ccc", margin:margin, padding:0, outline:'none'});
+
+			$(this).replaceWith($(newInput));
+			$(newInput).select();
+			$(newInput).blur(function(){
+				var newVal = $(newInput).val();
+				var editForm = $(oldContent).attr("id");
+				var formParts = editForm.split('-');
+				if($("form[name='"+formParts[0]+"']").length){
+					var theForm = $("form[name='"+formParts[0]+"']");
+					$(theForm).find("#"+formParts[1]).val(newVal);
+					$(theForm).submit();
+				}
+
+				$(newInput).replaceWith($(oldContent));
+				$(oldContent).text(newVal);
+			});
+
+
+		});
+
+	});
+
+</script>
+<f:render section="Script" optional="true"></f:render>
+</body>
+</html>

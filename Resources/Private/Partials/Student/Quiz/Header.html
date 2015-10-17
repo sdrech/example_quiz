@@ -1,0 +1,59 @@
+<header class="quizmate-student-header bg-primary pad-h pad-v xs-pad-v-0">
+
+	<div class="container pad-v-xs">
+
+		<div class="grid dsp-table">
+			<h3 class="mar-0 xs-mar-v-s uppercase xs-text-align-center dsp-table-cell xs-dsp-block col-10 xs-col-20 color-gray">Lorem ipsum logo.</h3>
+			
+			<f:if condition="{showUserName}">
+				<f:then>
+					<div class="text-align-right xs-text-align-center dsp-table-cell xs-dsp-block col-10 xs-col-20 color-white xs-mar-bottom-s">
+						<p class="mar-0">
+							<span class="mar-right xs-dsp-block xs-mar-0"><i class="icon-font-user"></i> {studentQuizSession.student}</span>
+							<span class=""><i class="icon-font-group"></i> 7. a</span>
+						</p>
+					</div>
+				</f:then>
+			</f:if>
+
+			<div class="clearfix dsp-table-cell xs-dsp-block v-align-m text-align-right  col-11 s-col-12 xs-col-20 xs-text-align-center xs-mar-bottom">
+
+				<div class="mar-top-s">
+
+                    <f:if condition="{hideFinishButtonAndClock}">
+                        <f:else>
+                            <f:link.action action="studentFinish" controller="Quiz" class="btn btn-primary-light float-right mar-bottom-s mar-left xs-mar-left-0 xs-mar-bottom xs-float-none js-navigate-to" rel="finish">
+                                <f:translate id="quiz.finish"/>
+                            </f:link.action>
+
+							<div class="float-right xs-float-none">
+								<div class="clock xs-mar-h-auto hide">
+									<div class="clock-icon hide">
+										<i class="icon-font-clock"></i>
+									</div>
+
+									<div class="clock-numbers">
+                                                                                <span class="clock-number"><f:format.date format="H">@{studentQuizSession.timeRemaining}</f:format.date></span>
+                                                                                <span class="clock-seperator">:</span>
+                                                                                <span class="clock-number"><f:format.date format="i">@{studentQuizSession.timeRemaining}</f:format.date></span>
+                                                                                <span class="clock-seperator">:</span>
+                                                                                <span class="clock-number"><f:format.date format="s">@{studentQuizSession.timeRemaining}</f:format.date></span>
+									</div>
+
+									<div class="clock-toggle-btn js-ui-clock-toggle-btn">
+										<span><f:translate id="hide"/></span>
+										<span class="hide"><f:translate id="show"/></span>
+									</div>
+								</div>
+							</div>
+						</f:else>
+					</f:if>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+</header>

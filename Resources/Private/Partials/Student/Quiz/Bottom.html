@@ -1,0 +1,21 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write("<script src=\"{UIPath}js/vendor/jquery-1.9.1.min.js\"><\/script>")</script>
+
+<script src="{UIPath}plugins/plugins.js"></script>
+<script src="{UIPath}js/quizmate/quizmate.min.js"></script>
+<script src="{f:uri.resource(path: 'js/quizmate_application.min.js')}"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		QuizStudent.init();
+
+		StudentQuizClock.init({
+			countDirection: {f:if(condition: '{quiz.type} == {quiz.quizTypeTraining}', then: '"up"', else: '"down"')},
+			displayState: 'hhmmss', // should be pulled from DB or a cookie
+			displayStateSaveUrl: '/my', // TODO use the path to the controller, where the state can be saved (not created yet)
+			onComplete: function () {
+				// Do something on completion?
+			}
+		});
+	});
+</script>

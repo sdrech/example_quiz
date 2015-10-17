@@ -1,0 +1,33 @@
+<div id="soundFileElement"><f:translate id="playerLoading" /></div>
+<div class="dialogue" style="display:none;">
+	<div style="display: block;" id="dialogue-demo" class="js-ui-modal-dialogue-fullwidth">
+		<header class="js-ui-modal-dialogue-header">
+			<div class="js-ui-modal-dialogue-title container"><f:translate id="exercise.exam.audio.dialogue.notice" /></div>
+		</header>
+		<div class="js-ui-modal-dialogue-content container">
+			<p><f:translate id="exercise.exam.audio.dialogue.message" /></p>
+		</div>
+		<footer class="js-ui-modal-dialogue-footer container">
+			<a class="btn btn-tertiary-dark col-3 js-ui-modal-dialogue-play"><f:translate id="play" /></a>
+			<a class="btn btn-error-dark col-3 js-ui-modal-dialogue-close"><f:translate id="cancel" /></a>
+		</footer>
+	</div>
+</div>
+<script>
+	// need to attach a window load event, 
+	// because content is ready before all javascript is loaded
+	if (window.addEventListener) {
+		window.addEventListener('load', initMediaPlayer);
+	} else {
+		window.attachEvent('onload', initMediaPlayer);
+	}
+
+	function initMediaPlayer() {
+		AudioFile.init({
+			inputElement: 'soundFileElement', // input element to set audioPlayer to
+			type: {type}, // quiz type
+			getTrackerUrl: "<f:uri.action action='getTracker' controller='TrackStudentAudioPlayback' arguments='{exercise: currentExercise}' />",
+			updateTrackerUrl: "<f:uri.action action='updateTracker' controller='TrackStudentAudioPlayback' />"
+		});
+	}
+</script>

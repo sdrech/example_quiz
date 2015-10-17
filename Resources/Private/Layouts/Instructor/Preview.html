@@ -1,0 +1,44 @@
+{namespace _OurBrand_\Quiz\ViewHelpers}
+<f:render partial="Instructor/Preview/Top" arguments="{UIPath: UIPath, quiz: quiz}"/>
+<f:render partial="Instructor/Preview/Header" arguments="{quiz: quiz}"/>
+<:widget.pagination exercise="{currentExercise}" preview="1" />
+
+<hr>
+<div class="quizmate-content pad-v pad-bottom xs-pad-v-0">
+	<div class="container pad-h xs-pad-h-s">
+		<f:comment> Exercise content, like title, description, pdf, image, audiofile etc... </f:comment>
+		<f:render partial="Student/Quiz/ExerciseContent" arguments="{currentExercise: currentExercise, type: quiz.type, UIPath: UIPath}" />
+		
+		<div class="instruction-secondary">
+			<f:render section="Explanation" optional="true"/>
+		</div>
+
+		<f:render section="Content" />
+
+	</div>
+	<!-- end container -->
+</div>
+<!-- end quizmate content -->
+<br>
+<f:render partial="Instructor/Preview/Navigation" arguments="{quiz: quiz, currentExercise: currentExercise}" />
+
+</div>
+
+
+<f:render section="HiddenJavascriptHtml" optional="true"/>
+
+<f:render partial="Instructor/Preview/Footer" arguments="{
+	currentExercise: currentExercise,
+	previewExerciseIsHintSet: previewExerciseIsHintSet,
+	previewExerciseIsExplanationSet: previewExerciseIsExplanationSet,
+	previewExerciseDuration: previewExerciseDuration,
+	previewExerciseSkill: previewExerciseSkill,
+	previewExerciseDifficulty: previewExerciseDifficulty
+}"/>
+
+<f:render partial="Instructor/Preview/Bottom" arguments="{UIPath: UIPath}"/>
+
+<f:render section="Script" optional="true" />
+
+</body>
+</html>

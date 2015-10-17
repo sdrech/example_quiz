@@ -1,0 +1,53 @@
+{namespace _OurBrand_\Quiz\ViewHelpers}
+<h3 id="quiz-hyperlink-title" class="color-primary-dark mar-top-0">{currentExercise.title}</h3>
+<p><f:format.nl2br>{currentExercise.description}</f:format.nl2br></p>
+
+
+<f:if condition="{currentExercise.althelptext}">
+	<div class="instruction-secondary">
+		<p>{currentExercise.althelptext}</p>
+	</div>
+</f:if>
+
+<f:if condition="{currentExercise.image.originalResource}">
+	<div>
+		<a href="{f:uri.resource(resource: currentExercise.image.originalResource)}" title="{currentExercise.image.title}" data-author="{currentExercise.image.copyright}" class="fancybox">
+			<span class="fancybox-zoom"><i class="icon-font-search"></i></span>
+			<:image image="{currentExercise.image}" maximumWidth="753" maximumHeight="422" allowCropping="false" allowUpScaling="false" />
+		</a>
+	</div>
+	<br />
+</f:if>
+
+<f:if condition="{currentExercise.pdfFile.originalResource}">
+<div>
+	<a href="{f:uri.resource(resource: currentExercise.pdfFile.originalResource)}" target="_blank" title="{file.title}" class="btn btn-active">
+		<i class="icon-font-new-window"></i> Open {f:if(condition:'{currentExercise.pdfFile.type}', then: ' the {f:translate(id:\'exercise.addPdf.types.{currentExercise.pdfFile.type}\')}')}: 
+		{f:if(condition:'{currentExercise.pdfFile.title}', then: '{currentExercise.pdfFile.title}', else: '{currentExercise.pdfFile.originalResource.filename}')}
+	</a>
+</div>
+<br />
+</f:if>
+<f:if condition="{currentExercise.soundFile.originalResource}">
+	<f:render partial="Student/Quiz/AudioFile" arguments="{currentExercise: currentExercise, type: type, session: session, UIPath: UIPath}" />
+<br />
+</f:if>
+<f:if condition="{currentExercise.textContent}">
+<div>
+	<article class="quizmate-article">
+		<header class="quiz-mate-article-header">
+			<h3 class="text-align-center">{currentExercise.textContent.title}</h3>
+		</header>
+		<div class="quizmate-article-content">
+			<f:format.raw>{currentExercise.textContent.text}</f:format.raw>
+			<p class="quizmate-article-author"><i class="italic">{currentExercise.textContent.copyright}</i></p>
+		</div>
+	</article>
+	<a href="" class="js-ui-back-to-top btn btn-tertiary mar-bottom-l">
+		<i class="icon-font-arrow-up-2"></i>
+		<f:translate id="textContent.backToTop"/>
+	</a>
+</div>
+<br />
+<br />
+</f:if>

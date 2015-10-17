@@ -1,0 +1,19 @@
+{namespace _OurBrand_\Quiz\ViewHelpers}
+<hr>
+<div class="container clearfix pad pad-bottom-xl s-pad-s">
+	<f:if condition="{currentExercise.number} > 0">
+		<a href="#" class="btn btn-tertiary-dark js-navigate-to" rel="prev">
+			<i class="icon-font-arrow-left"></i>
+			Forrige
+		</a>
+	</f:if>
+
+	<f:if condition="{currentExercise}">
+		<f:if condition="{quiz.exercises->f:count()} > {currentExercise.number->:math(operation: '+', value:'1')}">
+			<a href="#" class="btn btn-tertiary-dark float-right js-navigate-to" rel="next">
+				Næste
+				<i class="icon-font-arrow-right"></i>
+			</a>
+		</f:if>
+	</f:if>
+</div>

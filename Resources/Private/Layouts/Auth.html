@@ -1,0 +1,41 @@
+{namespace _OurBrand_\Quiz\ViewHelpers}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title><f:render section="Title" /></title>
+
+        <link href="{f:uri.resource(path: 'css/quiz.css')}" rel="stylesheet" />
+
+        <f:comment>Local jquery source for offline dev.</f:comment>
+        <f:if condition="inDev">
+			<f:then><script src="http://www._OurBrand_.local/_Resources/Static/Packages/_OurBrand_.Quiz/js/vendor/jquery-1.9.1.min.js"></script></f:then>
+			<f:else><script src="{f:uri.resource(path: 'js/jquery-1.10.2.min.js')}"></script></f:else>
+        </f:if>
+
+
+
+		<f:base />
+	</head>
+	<body>
+
+    <div id="header">
+        <p style="float:right; width:250px; text-align:right; color:#fff;" class="service-links">
+			<f:translate id="user.youAre" arguments="{username: user.identifier}"/> -
+			<f:link.action action="logout" controller="authentication">
+				<f:translate id="user.logout"/>
+			</f:link.action> &nbsp;
+			<f:link.action action="index" controller="quiz">Front</f:link.action>
+		</p>
+
+        <h1><f:render section="Title" /></h1>
+
+    </div>
+    <div id="content" style="padding:10px; background-color:#fff;">
+
+		<f:render section="Menu" />
+		<f:render section="Content" />
+	</div>
+	<f:render section="Script" />
+	</body>
+</html>

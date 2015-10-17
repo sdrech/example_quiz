@@ -1,0 +1,12 @@
+{
+  "name": "quiz",
+  "type": "typo3-flow-package",
+  "description": "QuizMATE for Flow",
+  "version": "0.0.1",
+  "require": {
+    "typo3\/flow": "~2.1",
+    "imagine\/Imagine": ">=0.5"
+  },
+  "autoload": {
+  }
+}

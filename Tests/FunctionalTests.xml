@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<phpunit strict="true"
+		 bootstrap="FunctionalTestBootstrap.php"
+		 convertErrorsToExceptions="true"
+		 convertNoticesToExceptions="true"
+		 convertWarningsToExceptions="true"
+		 timeoutForSmallTests="0">
+	<testsuites>
+		<testsuite name="_OurBrand_.Quiz.Tests.FunctionalTesting">
+			<directory>../../../../Packages/Application/*/Tests/Functional/Domain/Repository</directory>
+			<exclude>../../../../Packages/Libraries</exclude>
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist addUncoveredFilesFromWhitelist="false">
+			<directory>../../../../Packages/*/*/Classes</directory>
+		</whitelist>
+	</filter>
+	<logging>
+		<log type="coverage-html" target="../../../../Build/Coverage/Functional" title="Functional tests"
+			 charset="UTF-8" yui="true" highlight="true"
+			 lowUpperBound="35" highLowerBound="70"/>
+		<log type="coverage-clover" target="../../../../Build/Logs/Functional/clover.xml"/>
+		<log type="junit" target="../../../../Build/Logs/Functional/junit.xml" logIncompleteSkipped="false"/>
+	</logging>
+	<php>
+		<env name="FLOW_REWRITEURLS" value="1"/>
+	</php>
+</phpunit>

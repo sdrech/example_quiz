@@ -1,0 +1,43 @@
+{namespace _OurBrand_\Quiz\ViewHelpers}
+<f:render partial="Student/Quiz/Top" arguments="{UIPath: UIPath, quiz: quiz, studentQuizSession: session}"/>
+<f:render partial="Student/Quiz/Header" arguments="{quiz: quiz, studentQuizSession: session, hideFinishButtonAndClock:hideFinishButtonAndClock}"/>
+<:widget.pagination exercise="{currentExercise}" />
+
+<hr>
+<div class="quizmate-content pad-v pad-bottom xs-pad-v-0">
+	<div class="container pad-h xs-pad-h-s">
+		<f:comment> Exercise content, like title, description, pdf, image, audiofile etc... </f:comment>
+		<f:render partial="Student/Quiz/ExerciseContent" arguments="{currentExercise: currentExercise, type: quiz.type, UIPath: UIPath}" />
+		
+		<div class="instruction-secondary">
+			<f:render section="Explanation" optional="true"/>
+		</div>
+
+		<f:link.action action="registeranswer" id="registerAnswerLink" />
+		<f:form action="studentnavigate" controller="quiz" name="register-answer-form" id="register-answer-form" onsubmit="return ExerciseStudent.saveProgress(true);">
+    		<f:form.hidden id="goto" name="goto" value="next"></f:form.hidden>
+
+    		<f:render section="Content" />
+
+    		<f:form.hidden name="exercise" value="{currentExercise}" />
+
+	    </f:form>
+
+	</div>
+	<!-- end container -->
+</div>
+<!-- end quizmate content -->
+
+<f:render section="HiddenJavascriptHtml" optional="true"/>
+<f:render partial="Student/Quiz/Navigation" arguments="{quiz: quiz, currentExercise: currentExercise}" />
+
+<p style="float:right; width:250px; text-align:right; color:#fff;" class="service-links">
+	<f:translate id="user.youAre" arguments="{username: user.identifier}"/> - <f:link.action action="logout" controller="authentication"><f:translate id="user.logout"/></f:link.action> &nbsp;	<f:link.action action="index" controller="quiz">Front</f:link.action></p>
+</p>
+
+<f:render partial="Student/Quiz/Bottom" arguments="{UIPath: UIPath, quiz: quiz}"/>
+
+<f:render section="Script" optional="true" />
+
+</body>
+</html>

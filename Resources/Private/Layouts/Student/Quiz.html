@@ -1,0 +1,16 @@
+{namespace _OurBrand_\Quiz\ViewHelpers}
+<f:render partial="Student/Quiz/Top" arguments="{UIPath: UIPath}"/>
+<f:render partial="Student/Quiz/Header" arguments="{quiz:quiz, studentQuizSession:session, defaultDuration:defaultDuration, hideFinishButtonAndClock:hideFinishButtonAndClock, showUserName:showUserName, previewSession:previewSession}"/>
+
+<f:flashMessages class="flashmessages" />
+<f:render section="Content" />
+
+<f:if condition="{previewSession}">
+	<f:render partial="Instructor/Quiz/PreviewFooter" arguments="{quiz: quiz}"/>
+</f:if>
+<f:render partial="Student/Quiz/JavaScript" arguments="{UIPath: UIPath}" />
+
+<f:render section="Script" optional="true" />
+
+</body>
+</html>
